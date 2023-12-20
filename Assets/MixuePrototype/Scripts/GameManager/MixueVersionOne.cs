@@ -3,11 +3,21 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class MixueVersionOne : MonoBehaviour
 {
+    #region testing parameter
+    /// <summary>
+    /// for testing the prototype
+    /// </summary>
+    /// might get delete afterward if it doesn't have actual use for the game
+    /// 
+
+    public bool gameStart = false;
+    #endregion
     #region mixueObject
     public enum mixueNumber
     {
@@ -29,6 +39,10 @@ public class MixueVersionOne : MonoBehaviour
         mixueNumber newMixue = (mixueNumber)((int)a.mixNumber + (int)b.mixNumber);
         Vector3 mixPosition = Vector3.Lerp(a.transform.position, b.transform.position, 0.5f);
         GameObject newMix = Instantiate(mixuePrefab, mixPosition, Quaternion.identity);
+        newMix.transform.localScale = Vector3.zero;
+        GameObject aGFX = Instantiate(a.gfxRenderer.gameObject, a.transform.position, Quaternion.identity);
+        GameObject bGFX = Instantiate(b.gfxRenderer.gameObject, b.transform.position, Quaternion.identity);
+        mergeToCenter(aGFX.transform, bGFX.transform, mixPosition,3);
         Destroy(a.gameObject);
         Destroy(b.gameObject);
         MixueObject newMixueObj = newMix.GetComponent<MixueObject>();
@@ -40,8 +54,51 @@ public class MixueVersionOne : MonoBehaviour
     {
         int actualMix = (int)mixue.mixNumber - 1;
         mixue.gfxRenderer.material = mixueMaterials[actualMix];
-        mixue.transform.localScale = Vector3.one + (Vector3.one * actualMix * .25f);
+        //mixue.transform.localScale = Vector3.one + (Vector3.one * actualMix * .25f);
+        Vector3 targetScale = Vector3.one + (Vector3.one * actualMix * .25f);
+        toTargetScale(mixue.transform, targetScale, 3);
     }
+
+    void toTargetScale(Transform objTransform, Vector3 targetScale, float duration = 1)
+    {
+
+        StartCoroutine(toTargetScaleCoroutine(objTransform, targetScale, duration));
+    }
+
+    IEnumerator toTargetScaleCoroutine(Transform obj, Vector3 targetScale, float duration)
+    {
+        float timer = 0;
+        while (timer < 1)
+        {
+            timer += Time.deltaTime / duration;
+            obj.localScale = Vector3.Lerp(obj.localScale, targetScale, timer);
+            yield return null;
+        }
+
+        obj.localScale = targetScale;
+    }
+
+    void mergeToCenter(Transform a, Transform b, Vector3 center, float duration = 1)
+    {
+        StartCoroutine(mergeToCenterCoroutine(a, b, center, duration));
+        toTargetScale(a, Vector3.zero, duration);
+        toTargetScale(b, Vector3.zero, duration);
+    }
+
+    IEnumerator mergeToCenterCoroutine(Transform a, Transform b, Vector3 center, float duration)
+    {
+        float timer = 0;
+        while (timer < 1)
+        {
+            timer += Time.deltaTime / duration;
+            a.position = Vector3.Lerp(a.position, center, timer);
+            b.position = Vector3.Lerp(b.position, center, timer);
+            yield return null;
+        }
+        Destroy(a.gameObject);
+        Destroy(b.gameObject);
+    }
+
     #endregion
 
     #region game timer
