@@ -5,8 +5,9 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class MixueObject : MonoBehaviour
+public class MixueObject : IPotInteractableObject
 {
+    public InteractableType Type;
     public float targetHeight = 3f;
     public float targetHeightThreshold = .1f;
     public float gravity = 10;

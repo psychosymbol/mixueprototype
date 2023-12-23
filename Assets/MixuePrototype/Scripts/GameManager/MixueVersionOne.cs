@@ -103,8 +103,8 @@ public class MixueVersionOne : MonoBehaviour
 
     #region game timer
     [Header("Time Properties")]
-    public int timePerDay = 9;
-    public int dayTimer;
+    public float timePerDay = 540;
+    public float dayTimer;
     AudioSource timeAudioSource;
     [Tooltip("(Optional) Play this clip when starting to slow time")]
     public AudioClip SlowTimeClip;
@@ -125,16 +125,9 @@ public class MixueVersionOne : MonoBehaviour
 
     public void timePass()
     {
-        dayTimer -= 1;
-        foreach (var item in pots)
-        {
-            if (item.isStartMixing)
-            {
-                item.mixingTimer += 1;
-                spawnByProduct(item);
-            }
-        }
+        dayTimer -= Time.deltaTime;
     }
+
     public void SlowTime()
     {
 
@@ -223,15 +216,13 @@ public class MixueVersionOne : MonoBehaviour
 
     public void spawnByProduct(Pot potContent)
     {
-        int byProductType = potContent.mixues[potContent.mixingTimer - 1];
+        int byProductType = potContent.mixues[potContent.byProductType];
         byProductType = byProductType - 1; // method will change with design
-
+        potContent.byProductType++;
         if (byProductType <= 0) return;
         MixueObject byProduct = Instantiate(mixuePrefab, potContent.byProductSpawnPoint.position, Quaternion.identity).GetComponent<MixueObject>();
         byProduct.mixNumber = (mixueNumber)byProductType;
         mixueInit(byProduct);
-
-
     }
     #endregion
 

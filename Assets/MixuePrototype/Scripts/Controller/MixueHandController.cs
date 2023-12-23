@@ -41,7 +41,7 @@ public class MixueHandController : MonoBehaviour
                     int layerMask = 1 << 10;
                     if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
                     {
-                        Debug.Log("Did Hit");
+                        //Debug.Log("Did Hit");
                         grabPointer.SetPosition(1, new Vector3(0, 0, hit.distance));
                         if (hit.transform.gameObject != rayTarget)
                             stopPulling();
@@ -49,7 +49,7 @@ public class MixueHandController : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("Did not Hit");
+                        //Debug.Log("Did not Hit");
                         grabPointer.SetPosition(1, new Vector3(0, 0, 0.3f));
                         if (rayTarget)
                             stopPulling();

@@ -390,7 +390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d27713e18eb14d04fa753e799b3d3edf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetHeight: 3
+  targetHeight: 1
   targetHeightThreshold: 0.05
   gravity: 0.5
   isPulled: 0
