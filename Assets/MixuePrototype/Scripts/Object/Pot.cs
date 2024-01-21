@@ -90,7 +90,7 @@ public class Pot : MonoBehaviour
                 byProductElasped += Time.deltaTime;
                 if (byProductElasped >= ingredientMixDuration)
                 {
-                    MixueVersionOne.Instance.spawnByProduct(this);
+                    MixueVersionOne.Instance.SpawnByProduct(this);
                     byProductElasped -= ingredientMixDuration;
                 }
                 if (mixingTimer >= totalMixDuration)
@@ -122,7 +122,7 @@ public class Pot : MonoBehaviour
                         if (mixues.Count < 3)
                         {
                             MixueObject mixue = other.gameObject.GetComponent<MixueObject>();
-                            MixueVersionOne.Instance.fillPot(this, mixue);
+                            MixueVersionOne.Instance.FillPot(this, mixue);
                         }
                     }
                     break;
@@ -132,7 +132,9 @@ public class Pot : MonoBehaviour
                     if (currentObject.Type == IPotInteractableObject.InteractableType.Bottle)
                     {
                         Bottle bottle = other.gameObject.GetComponent<Bottle>();
+                        if (bottle.isFilled) return;
                         bottle.bottleContent.material.color = potContent.material.color;
+                        bottle.isFilled = true;
                         mixIngredientsNumber -= 1;
                     }
                     break;

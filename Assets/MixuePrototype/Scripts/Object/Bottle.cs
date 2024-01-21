@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bottle : IPotInteractableObject
 {
-    public InteractableType Type;
     public Renderer bottleContent;
+    public bool isFilled = false;
 
 }

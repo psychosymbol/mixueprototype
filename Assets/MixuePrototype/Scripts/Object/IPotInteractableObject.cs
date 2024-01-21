@@ -10,5 +10,5 @@ public class IPotInteractableObject : MonoBehaviour
         Mixue,
         Bottle
     }
-    public InteractableType Type { get; set;}
+    public InteractableType Type;
 }

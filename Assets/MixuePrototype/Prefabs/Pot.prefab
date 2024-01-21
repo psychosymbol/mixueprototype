@@ -388,11 +388,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8909ae2668b35ea42aebf41bb68ee14f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mixState: 0
   mixues: 
-  isDoneMixing: 0
-  isStartMixing: 0
   mixIngredientsNumber: 0
   mixingTimer: 0
+  ingredientMixDuration: 60
+  byProductType: 0
   timerCanvas: {fileID: 1316345500}
   timerFiller: {fileID: 453252938}
   byProductSpawnPoint: {fileID: 3741659952663723586}
@@ -404,7 +405,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3936342825511527753}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5cdea428d48e2bb488d33d5f75c39bb9, type: 3}
   m_Name: 

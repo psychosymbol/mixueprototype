@@ -4411,7 +4411,7 @@ GameObject:
   - component: {fileID: 457317906}
   - component: {fileID: 457317905}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Timer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13140,13 +13140,14 @@ MonoBehaviour:
   - {fileID: 2100000, guid: f455bfdb0cba40f4bb34e3042ad7df2d, type: 2}
   mixuePrefab: {fileID: 8587799248484414044, guid: f26c45a56a3f22e48a92789446b34d4e,
     type: 3}
-  timePerDay: 9
+  timePerDay: 540
   dayTimer: 0
   SlowTimeClip: {fileID: 0}
   SpeedupTimeClip: {fileID: 0}
   SlowTimeScale: 0.5
   SpeedTimeScale: 2
   SetFixedDelta: 0
+  filledTimer: {fileID: 457317905}
   pots:
   - {fileID: 69817793}
   - {fileID: 1435937542}

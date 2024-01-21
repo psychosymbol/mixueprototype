@@ -6,6 +6,7 @@ using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MixueVersionOne : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class MixueVersionOne : MonoBehaviour
         Blue = 4,
         Purple = 5,
         Cyan = 6
+
 
     }
     [HideInInspector]
@@ -118,14 +120,21 @@ public class MixueVersionOne : MonoBehaviour
     public bool SetFixedDelta = false;
     float originalFixedDelta;
     bool _slowingTime = false;
-    public void resetDay()
+    public Image filledTimer;
+    public void ResetDay()
     {
         dayTimer = timePerDay;
     }
 
-    public void timePass()
+    public void UpdateTimer()
     {
         dayTimer -= Time.deltaTime;
+    }
+
+    public void UpdateTimeUI()
+    {
+        float uiTimer = dayTimer.Remap(0, timePerDay, 0, 1);
+        filledTimer.fillAmount = uiTimer;
     }
 
     public void SlowTime()
@@ -199,7 +208,7 @@ public class MixueVersionOne : MonoBehaviour
     [Header("Pot Properties")]
     public List<Pot> pots = new List<Pot>();
 
-    public void fillPot(Pot pot, MixueObject mixue)
+    public void FillPot(Pot pot, MixueObject mixue)
     {
 
         pot.mixues.Add((int)mixue.mixNumber);
@@ -214,7 +223,7 @@ public class MixueVersionOne : MonoBehaviour
         pot.potContent.material.color = newContent;
     }
 
-    public void spawnByProduct(Pot potContent)
+    public void SpawnByProduct(Pot potContent)
     {
         int byProductType = potContent.mixues[potContent.byProductType];
         byProductType = byProductType - 1; // method will change with design
@@ -235,7 +244,7 @@ public class MixueVersionOne : MonoBehaviour
     }
     void Start()
     {
-        resetDay();
+        ResetDay();
         lastMix = (int)Enum.GetValues(typeof(mixueNumber)).Cast<mixueNumber>().Last();
 
         if (SetFixedDelta)
@@ -252,7 +261,8 @@ public class MixueVersionOne : MonoBehaviour
     #region update
     void Update()
     {
-        
+        UpdateTimer();
+        UpdateTimeUI();
     }
     #endregion
 }

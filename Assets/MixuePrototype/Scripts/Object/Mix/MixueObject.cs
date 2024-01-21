@@ -7,7 +7,6 @@ using UnityEngine.UIElements;
 
 public class MixueObject : IPotInteractableObject
 {
-    public InteractableType Type;
     public float targetHeight = 3f;
     public float targetHeightThreshold = .1f;
     public float gravity = 10;
@@ -48,7 +47,7 @@ public class MixueObject : IPotInteractableObject
         }
         else
         {
-            floating();
+            Floating();
 
         }
 
@@ -57,7 +56,7 @@ public class MixueObject : IPotInteractableObject
             targetHeightDebugSphere.transform.position = new Vector3(transform.position.x, targetHeight, transform.position.z);
         }
     }
-    void floating()
+    void Floating()
     {
         float currentHeight = transform.position.y;
         if (Mathf.Abs(currentHeight - targetHeight) > targetHeightThreshold)
